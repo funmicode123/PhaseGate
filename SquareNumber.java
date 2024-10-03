@@ -28,15 +28,7 @@ public class SquareNumber{
 
 	}
 
-	public static void isAscendingOrder(int[] numbersSquared){
-       		int[] numberSquared = new int[numbersSquared.length];
-		int numberSquared[0] = minimum;
-		for(int index = 0; index < numbersSquared.length; index++){
-			if (minimum < numbersSquared[index])
-				minimum = numbersSquared[index]
-		}
-
-  	}
+	
 
 
 
