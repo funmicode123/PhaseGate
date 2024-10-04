@@ -1,46 +1,39 @@
-
-
 public class SquareNumber2 {
 
     public static void main(String[] args) {
-
         int[] numbers = {2, 1, 4, 3, 5, 9};
 
-        int[] numbersSquared = squareInteger(numbers);
-
-
-        System.out.println("Squared numbers in ascending order: ");
-        for (int index = 0; index < numbersSquared.length; index++) {
-
-            if (index == numbersSquared.length - 1) {
-
-                System.out.printf("%d", numbersSquared[index]);
-            } else {
-  
-                System.out.printf("%d, ", numbersSquared[index]);
-            }
+        int[] sortedSquares = sortSquaredNumbers(numbers);
+	
+	System.out.print("Squared numbers in ascending order: [");
+        for (int index = 0; index < sortedSquares.length; index++) {
+            System.out.printf("%d%s ", sortedSquares[index], (index < sortedSquares.length - 1) ? "," : "]");
         }
 
     }
 
-    public static int[] squareInteger(int[] numbers) {
+
+    public static int[] sortSquaredNumbers(int[] numbers) {
         int[] squaredNumbers = new int[numbers.length];
 
         for (int index = 0; index < numbers.length; index++) {
             squaredNumbers[index] = numbers[index] * numbers[index];
         }
 
+        boolean swapped;
+        for (int count = 0; count < squaredNumbers.length - 1; count++) {
+            swapped = false;
+            for (int index = 0; index < squaredNumbers.length - count - 1; index++) {
+                if (squaredNumbers[index] > squaredNumbers[index + 1]) {
+                    int compare = squaredNumbers[index];
+                    squaredNumbers[index] = squaredNumbers[index + 1];
+                    squaredNumbers[index + 1] = compare;
+                    swapped = true;
+                }
+            }
+            if (!swapped) break;
+        }
+
         return squaredNumbers;
     }
-
-    public static void isAscendingOrder(int[] numbersSquared){
-        int[] numberSquared = new int[numbersSquared.length];
-	int numberSquared[0] = minimum;
-	for(int index = 0; index < numbersSquared.length; index++){
-		if (minimum < numbersSquared[index])
-			minimum = numbersSquared[index]
-	}
-
-    }
-
 }
