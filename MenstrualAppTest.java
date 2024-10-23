@@ -11,7 +11,7 @@ public class MenstrualAppTest {
         LocalDate expectedNextPeriod = LocalDate.of(2024, 10, 29);
 
         LocalDate result = lastPeriodStart.plusDays(cycleDays);
-        assertEquals(expectedNextPeriod, result, "Next period calculation failed.");
+        assertEquals(expectedNextPeriod, result);
     }
 
     @Test
@@ -20,7 +20,7 @@ public class MenstrualAppTest {
         LocalDate expectedOvulationDay = LocalDate.of(2024, 10, 15);
 
         LocalDate result = nextPeriod.minusDays(14);
-        assertEquals(expectedOvulationDay, result, "Ovulation day calculation failed.");
+        assertEquals(expectedOvulationDay, result);
     }
 
     @Test
@@ -31,8 +31,8 @@ public class MenstrualAppTest {
         LocalDate expectedFertileStart = ovulationDay.minusDays(periodDuration);
         LocalDate expectedFertileEnd = ovulationDay.plusDays(1);
 
-        assertEquals(LocalDate.of(2024, 10, 10), expectedFertileStart, "Fertile window start calculation failed.");
-        assertEquals(LocalDate.of(2024, 10, 16), expectedFertileEnd, "Fertile window end calculation failed.");
+        assertEquals(LocalDate.of(2024, 10, 10), expectedFertileStart);
+        assertEquals(LocalDate.of(2024, 10, 16), expectedFertileEnd);
     }
 
     @Test
@@ -41,6 +41,6 @@ public class MenstrualAppTest {
         int periodDuration = 5;
 
         LocalDate expectedPeriodEnd = lastPeriodStart.plusDays(periodDuration - 1);
-        assertEquals(LocalDate.of(2024, 10, 5), expectedPeriodEnd, "Period end calculation failed.");
+        assertEquals(LocalDate.of(2024, 10, 5), expectedPeriodEnd);
     }
 }
