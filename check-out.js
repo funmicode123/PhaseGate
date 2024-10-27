@@ -1,4 +1,6 @@
 const semiColonStore = {
+    "rice": 550.00,
+    "parfait": 2100,
     "ovatin": 9500.00,
     "peakMilk": 5200.00,
     "bread(b/s)": 3000.00,
@@ -33,7 +35,8 @@ read_line.question('What is the customer\'s name? ', (name) => {
                     let unitCost = semiColonStore[item] || 0;
                     if (unitCost === 0) {
                         console.log(`Sorry, ${item} is not available in the store.`);
-                    } else {
+                    }
+		    else {
                         let itemTotal = unitCost * quantity;
                         totalCost += itemTotal;
                         itemsList.push({ item, quantity, itemTotal });
