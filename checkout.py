@@ -41,7 +41,7 @@ def ask_for_items():
         else:
             item_total = unit_cost * quantity
             total_cost += item_total
-            items_list.append((item, quantity, item_total))
+            items_list.append((item, quantity, unit_cost, item_total))
             print(f"Added {quantity} of {item} to the cart.")
 
         add_more = input("Add more items? (yes/no): ").strip().lower()
@@ -71,11 +71,11 @@ def ask_for_items():
     print(f"Cashier: {cashier_name}")
     print(f"Customer's Name: {name}")
     print("=" * 70)
-    print(f"\tITEM\t\tQTY\tTOTAL (NGN)")
+    print(f"\tITEM\t\tQTY\tPRICE\t\tTOTAL (NGN)")
     print("-" * 70)
 
-    for item, quantity, item_total in items_list:
-        print(f"\t{item}\t\t{quantity}\t\t{item_total:.2f}")
+    for item, quantity, unit_cost, item_total in items_list:
+        print(f"\t{item}\t\t{quantity}\t{unit_cost:.2f}\t\t{item_total:.2f}")
 
     print("-" * 70)
     print(f"\t\t\tSub Total:\t {total_cost:.2f}")
@@ -107,11 +107,11 @@ def ask_for_items():
     print(f"Cashier: {cashier_name}")
     print(f"Customer's Name: {name}")
     print("=" * 70)
-    print(f"\tITEM\t\tQTY\tTOTAL (NGN)")
+    print(f"\tITEM\t\tQTY\tPRICE\t\tTOTAL(NGN)")
     print("-" * 70)
 
-    for item, quantity, item_total in items_list:
-        print(f"\t{item}\t\t{quantity}\t\t{item_total:.2f}")
+    for item, quantity, unit_cost, item_total in items_list:
+        print(f"\t{item}\t\t{quantity}\t{unit_cost:.2f}\t\t{item_total:.2f}")
 
     print("-" * 70)
     print(f"\t\t\tSub Total:\t {total_cost:.2f}")

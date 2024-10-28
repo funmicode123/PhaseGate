@@ -48,14 +48,14 @@ function askForItems(name) {
                 const unitCost = semiColonStore[item];
                 const itemTotal = unitCost * quantity;
                 totalCost += itemTotal;
-                itemsList.push({ item, quantity, itemTotal });
+                itemsList.push({ item, quantity, unitCost, itemTotal });
                 console.log(`Added ${quantity} of ${item} to the cart.`);
 
                 read_line.question('Add more items? (yes/no): ', (addMore) => {
-                    if (addMore.toLowerCase() === 'yes') {
+                    if (addMore.toLowerCase().trim() === 'yes') {
                         addItem();
                     } else {
-                        finalizeBill(name, totalCost, itemsList);
+                        calculateBill(name, totalCost, itemsList);
                     }
                 });
             });
@@ -65,13 +65,13 @@ function askForItems(name) {
     addItem();
 }
 
-function finalizeBill(name, totalCost, itemsList) {
+function calculateBill(name, totalCost, itemsList) {
     read_line.question('The cashier name: ', (cashierName) => {
         read_line.question('How much discount will be applied? ', (discountInput) => {
             let discount = parseFloat(discountInput) || 0;
             if (discount < 0 || discount > totalCost) {
                 console.log("Invalid discount. Please enter a value between 0 and the subtotal.");
-                return finalizeBill(name, totalCost, itemsList);
+                return calculateBill(name, totalCost, itemsList);
             }
 
             const vat = (VAT * totalCost) / 100;
@@ -83,7 +83,7 @@ function finalizeBill(name, totalCost, itemsList) {
                 let amountPaid = parseFloat(amountPaidInput) || 0;
                 if (amountPaid < totalBill) {
                     console.log("Insufficient payment. Please pay the full amount.");
-                    return finalizeBill(name, totalCost, itemsList);
+                    return calculateBill(name, totalCost, itemsList);
                 }
 
                 const balance = amountPaid - totalBill;
@@ -103,11 +103,11 @@ function printInterimReceipt(name, cashierName, dateString, timeString, itemsLis
     console.log(`Cashier: ${cashierName}`);
     console.log(`Customer's Name: ${name}`);
     console.log("=".repeat(70));
-    console.log(`\tITEM\t\tQTY\tTOTAL (NGN)`);
+    console.log(`\tITEM\t\tQTY\t\tPRICE\t\tTOTAL (NGN)`);
     console.log("-".repeat(70));
 
-    itemsList.forEach(({ item, quantity, itemTotal }) => {
-        console.log(`\t${item}\t\t${quantity}\t\t${itemTotal.toFixed(2)}`);
+    itemsList.forEach(({ item, quantity, unitCost, itemTotal }) => {
+        console.log(`\t${item}\t\t${quantity}\t\t${unitCost.toFixed(2)}\t\t${itemTotal.toFixed(2)}`);
     });
 
     console.log("-".repeat(70));
@@ -130,11 +130,11 @@ function printFinalReceipt(name, cashierName, dateString, timeString, itemsList,
     console.log(`Cashier: ${cashierName}`);
     console.log(`Customer's Name: ${name}`);
     console.log("=".repeat(70));
-    console.log(`\tITEM\t\tQTY\tTOTAL (NGN)`);
+    console.log(`\tITEM\t\tQTY\t\tPRICE\t\tTOTAL (NGN)`);
     console.log("-".repeat(70));
 
-    itemsList.forEach(({ item, quantity, itemTotal }) => {
-        console.log(`\t${item}\t\t${quantity}\t\t${itemTotal.toFixed(2)}`);
+    itemsList.forEach(({ item, quantity, unitCost, itemTotal }) => {
+        console.log(`\t${item}\t\t${quantity}\t\t${unitCost.toFixed(2)}\t\t${itemTotal.toFixed(2)}`);
     });
 
     console.log("-".repeat(70));
